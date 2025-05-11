@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/dialog_screen.dart'; //auto import
 import './screens/color_screen.dart';
-import './screens/calc_screen.dart';
+import './screens/calc_screen.dart'; //manual import
 
 void main() {
   runApp(const MainApp());
@@ -16,7 +17,13 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.white,
+          seedColor: Colors.orange,
+          brightness: Brightness.light,
+        ),
+      ),
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.orange,
           brightness: Brightness.dark,
         ),
       ),
@@ -32,18 +39,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int currentIndex = 1; //page index
+  int currentIndex = 2; //page index
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'HELLO WORLD',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 30,
-            color: Colors.white,
+        title: Center(
+          child: Text(
+            'HELLO WORLD',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 30,
+              color: Colors.white,
+            ),
           ),
         ),
       ),
@@ -51,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
           [
             ColorScreen(),
             CalcScreen(),
-            Placeholder(),
+            DialogScreen(),
           ][currentIndex], //list of widgets
       bottomNavigationBar: NavigationBar(
         selectedIndex: currentIndex,
@@ -63,10 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.calculate),
             label: 'Calculate',
           ),
-          NavigationDestination(
-            icon: Icon(Icons.file_open),
-            label: 'Documents',
-          ),
+          NavigationDestination(icon: Icon(Icons.chat_bubble), label: 'Dialog'),
         ],
         onDestinationSelected: (index) {
           setState(() {

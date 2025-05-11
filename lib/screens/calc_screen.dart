@@ -8,53 +8,78 @@ class CalcScreen extends StatefulWidget {
 }
 
 class _CalcScreenState extends State<CalcScreen> {
+  Color bgColor = Colors.grey;
   double num1 = 0;
   double num2 = 0;
   double result = 0;
-  TextEditingController num1Controller = TextEditingController();
+  TextEditingController num1Controller =
+      TextEditingController(); //Controller to grab input from user
   TextEditingController num2Controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        spacing: 24.0,
-        children: [
-          Wrap(
-            spacing: 16.0,
-            children: [
-              SizedBox(
-                width: 100,
-                child: TextField(
-                  keyboardType: TextInputType.number,
-                  controller: num1Controller,
-                  decoration: InputDecoration(border: OutlineInputBorder()),
-                  style: TextStyle(fontSize: 24.0),
+    return Container(
+      decoration: BoxDecoration(color: bgColor),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          spacing: 24.0,
+          children: [
+            Wrap(
+              spacing: 16.0,
+              children: [
+                SizedBox(
+                  width: 100,
+                  child: TextField(
+                    keyboardType: TextInputType.number,
+                    controller: num1Controller,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black, width: 2.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black, width: 2.0),
+                      ),
+                    ),
+                    style: TextStyle(fontSize: 24.0, color: Colors.black),
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: 100,
-                child: TextField(
-                  controller: num2Controller,
-                  decoration: InputDecoration(border: OutlineInputBorder()),
-                  style: TextStyle(fontSize: 24.0),
+                SizedBox(
+                  width: 100,
+                  child: TextField(
+                    controller: num2Controller,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black, width: 2.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black, width: 2.0),
+                      ),
+                    ),
+                    style: TextStyle(fontSize: 24.0, color: Colors.black),
+                  ),
                 ),
-              ),
-              Text('=', style: TextStyle(fontSize: 50.0)),
-              Text(result.toString(), style: TextStyle(fontSize: 50.0)),
-            ],
-          ),
-          Wrap(
-            spacing: 8.0,
-            children: [
-              displayButton(context, '+'),
-              displayButton(context, '-'),
-              displayButton(context, 'x'),
-              displayButton(context, '/'),
-            ],
-          ),
-        ],
+                Text(
+                  '=',
+                  style: TextStyle(fontSize: 50.0, color: Colors.black),
+                ),
+                Text(
+                  result.toString(),
+                  style: TextStyle(fontSize: 50.0, color: Colors.black),
+                ),
+              ],
+            ),
+            Wrap(
+              spacing: 8.0,
+              children: [
+                displayButton(context, '+'),
+                displayButton(context, '-'),
+                displayButton(context, 'x'),
+                displayButton(context, '/'),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -94,7 +119,10 @@ class _CalcScreenState extends State<CalcScreen> {
         });
       },
       style: ElevatedButton.styleFrom(fixedSize: Size(80, 40)),
-      child: Text(operator, style: TextStyle(fontSize: 24.0)),
+      child: Text(
+        operator,
+        style: TextStyle(fontSize: 24.0, color: Colors.white),
+      ),
     );
   }
 }

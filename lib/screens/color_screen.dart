@@ -16,7 +16,7 @@ class _ColorScreenState extends State<ColorScreen> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Click me!'),
+          title: Text('Are you sure ?'),
           content: SingleChildScrollView( //this is a scrollable widget
             child: ListBody(
               children: <Widget>[
