@@ -8,7 +8,7 @@ class CalcScreen extends StatefulWidget {
 }
 
 class _CalcScreenState extends State<CalcScreen> {
-  Color bgColor = Colors.grey;
+  Color bgColor = const Color.fromARGB(255, 244, 224, 193);
   double num1 = 0;
   double num2 = 0;
   double result = 0;

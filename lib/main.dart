@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/dialog_screen.dart'; //auto import
+import 'package:flutter_application_1/theme_provider.dart';
 import './screens/color_screen.dart';
 import './screens/calc_screen.dart'; //manual import
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -12,7 +19,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = context.watch<ThemeProvider>().darkMode;
     return MaterialApp(
+      //get the dark mode
       home: MyHomePage(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -27,6 +36,7 @@ class MainApp extends StatelessWidget {
           brightness: Brightness.dark,
         ),
       ),
+      themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
     );
   }
 }
@@ -45,13 +55,19 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            context.read<ThemeProvider>().toggleTheme();
+          },
+          icon: Icon(Icons.dark_mode),
+        ),
         title: Center(
           child: Text(
             'HELLO WORLD',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 30,
-              color: Colors.white,
+              color: Colors.orange,
             ),
           ),
         ),
@@ -61,6 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ColorScreen(),
             CalcScreen(),
             DialogScreen(),
+            Placeholder(),
           ][currentIndex], //list of widgets
       bottomNavigationBar: NavigationBar(
         selectedIndex: currentIndex,
@@ -73,6 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Calculate',
           ),
           NavigationDestination(icon: Icon(Icons.chat_bubble), label: 'Dialog'),
+          NavigationDestination(icon: Icon(Icons.people), label: 'Profile'),
         ],
         onDestinationSelected: (index) {
           setState(() {

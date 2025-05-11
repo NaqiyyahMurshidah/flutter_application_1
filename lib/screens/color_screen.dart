@@ -8,7 +8,7 @@ class ColorScreen extends StatefulWidget {
 }
 
 class _ColorScreenState extends State<ColorScreen> {
-  Color bgColor = Colors.grey;
+  Color bgColor = Color.fromARGB(255, 244, 224, 193);
 
   void _showMyDialog(BuildContext context) {
     showDialog(
@@ -17,7 +17,8 @@ class _ColorScreenState extends State<ColorScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Are you sure ?'),
-          content: SingleChildScrollView( //this is a scrollable widget
+          content: SingleChildScrollView(
+            //this is a scrollable widget
             child: ListBody(
               children: <Widget>[
                 Text('This is a demo dialog.'),
@@ -108,7 +109,10 @@ class _ColorScreenState extends State<ColorScreen> {
                 ),
               ),
             ),
-            ElevatedButton(onPressed: () => _showMyDialog(context), child: Text('Click me!')),
+            ElevatedButton(
+              onPressed: () => _showMyDialog(context),
+              child: Text('Click me!'),
+            ),
           ],
         ),
       ),
