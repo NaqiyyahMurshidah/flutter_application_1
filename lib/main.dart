@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/dialog_screen.dart'; //auto import
+import 'package:flutter_application_1/screens/profile_screen.dart';
 import 'package:flutter_application_1/theme_provider.dart';
 import './screens/color_screen.dart';
 import './screens/calc_screen.dart'; //manual import
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart'; //provider is to make all screen accessible from any screen
 
 void main() {
   runApp(
@@ -19,7 +20,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isDarkMode = context.watch<ThemeProvider>().darkMode;
+    bool isDarkMode =
+        context.watch<ThemeProvider>().darkMode; //watch waiting for update
     return MaterialApp(
       //get the dark mode
       home: MyHomePage(),
@@ -49,17 +51,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int currentIndex = 2; //page index
+  int currentIndex = 3; //page index
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = context.watch<ThemeProvider>().darkMode;
     return Scaffold(
       appBar: AppBar(
+        // centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            context.read<ThemeProvider>().toggleTheme();
+            context.read<ThemeProvider>().toggleTheme(); //read toggle function
           },
-          icon: Icon(Icons.dark_mode),
+          icon: isDarkMode ? Icon(Icons.light_mode) : Icon(Icons.dark_mode),
         ),
         title: Center(
           child: Text(
@@ -77,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ColorScreen(),
             CalcScreen(),
             DialogScreen(),
-            Placeholder(),
+            ProfileScreen(),
           ][currentIndex], //list of widgets
       bottomNavigationBar: NavigationBar(
         selectedIndex: currentIndex,
